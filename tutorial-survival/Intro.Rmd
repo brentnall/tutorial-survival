@@ -6,7 +6,7 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
-library(gradethis)
+#library(gradethis)
 library("survminer")
 library("survival")
 knitr::opts_chunk$set(echo = FALSE)
@@ -17,24 +17,17 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Introduction
 
 ### Intended learning objectives
-The aim of this tutorial is to review material from the lecture, in order that you
+The aim of this tutorial is to review material from the lecture, in order that you may
 
 1. Understand definitions of risk and survival
 
 1. Understand definitions and utlity of Kaplan Meier estimation, log-rank tests and proportional hazards
 
-1. Are able to apply this knowledge to interpret survival analysis data
+1. Apply this knowledge to interpret survival analysis data when reading reports
 
 ### What you will be do 
 
-The tutorial is a mix of reading material and multipl-choice, free-text and calculation questions. 
-
-The calculation questions include the option to use R, but this is not required (eg. you could use a calculator instead). To use the inbuilt calculations through R enter the calculation and hit the "run code", "submit answer" buttons. For example, if you needed to work out 10 times 20 then you'd just enter the following. Run the code to get the answer.
-
-```{r evalute-mult, exercise=TRUE}
-10 * 20
-```
-To begin the tutorial, please proceed to "Next Topic"!
+The tutorial is a mix of reading material, instructions and questions. It is intended to be used like an exercise sheet, but will also provide instant feedback on your answers. To begin, please proceed to "Next Topic"
 
 ## Risk definitions
 
@@ -91,95 +84,83 @@ question_radio(
 
 ## Risk Exercise
 
-Suppose 100 patients are recruited into a trial and were randomised to receive a new drug to treat cancer. In total they are followed up for 200 person years, and 40 died. Calculate the absolute risk of death in the trial. Enter you answer as a proportion (number between 0 and 1), or by calculating using R code in the following cell. 
 
-```{r grade_res, exercise = TRUE}
+
+Here is a calculator (R command window) that you might use to help you answer the below questions:
+```{r evalute-calc, exercise=TRUE}
 
 ```
 
-```{r grade_res-check}
-grade_result(
-  pass_if(~ identical(.result, 40/100), "Correct, expressed as a percentage the absolute risk is 40%."),
-  fail_if(~ identical(.result, 40/200), "Incorrect - this is the mean rate"),
-  fail_if(~ TRUE, "Not quite. Consider that the absolute risk here is the number of events divided by the number of people.")
+**Scenario** 100 patients are recruited into a trial and were randomised to receive a new drug to treat cancer. In total they are followed up for 200 person years, and 40 died. 
+
+```{r question-absrisk1}
+question_text(
+  "Calculate the absolute risk of death in the trial. Enter you answer as a percentage",
+  answer("40", correct=TRUE),
+  answer("40%", correct=TRUE ),
+  answer("20", message = "This is the mean rate, use number of patients not time at risk"),
+  answer("20%", message = "This is the mean rate, use number of patients not time at risk"),
+  allow_retry = TRUE,
+  trim = FALSE
 )
 ```
+
 
 Another 100 patients were also recruited into a trial, and they were randomised to receive a placebo and acted as a control group. In total this group were followed up for 180 person years, and 50 died. Calculate the absolute risk of death in the trial of this group and enter it as a proportion (number between 0 and 1), or by calculating it using R code.
 
-```{r grade_res2, exercise = TRUE}
-
-```
-
-```{r grade_res2-check}
-grade_result(
-  pass_if(~ identical(.result, 50/100), "Correct, absolute risk is 50%."),
-  fail_if(~ identical(.result, 50/180), "Incorrect - this is the mean rate"),
-  fail_if(~ identical(.result, 40/180), "Incorrect - this is the absolute risk for the other treated group"),
-  fail_if(~ TRUE, "Not quite. Consider that the absolute risk here is the number of events divided by the number of people.")
-)
-```
-
-What is was the relative risk of death for the new treatment in the trial?
-
-```{r grade_res3, exercise = TRUE}
-
-```
-
-```{r grade_res3-check}
-grade_result(
-  pass_if(~ identical(.result, 4/5), "Correct, 0.8."),
-  fail_if(~ identical(.result, 5/4), "Close, but this is the relative risk of the placebo group relative to the treated group. You need to invert your answer / reasoning. "),
-  fail_if(~ TRUE, "Not quite. Consider that the relative risk is the ratio of the two absolute risks you calculated above.")
-)
-```
-
-What was the average hazard (or rate) of death in the placebo group?
-
-```{r grade_res4, exercise = TRUE}
-
-```
-
-```{r grade_res4-check}
-grade_result(
-  pass_if(~ identical(round(.result,2), 0.28,2), "Correct, 50/180."),
-  fail_if(~ identical(.result, 50/200), "Incorrect - check the time at risk you used."),
-  fail_if(~ identical(.result, 40/200), "Incorrect - this is the treated group"),
-  fail_if(~ TRUE, "Not quite. Consider that the mean hazard is the total number of deaths divided by total time at risk (or followed up).")
+```{r question-absrisk2}
+question_text(
+  "Calculate the absolute risk of death in the trial of this group as a percentage (between 0 and 100%)",
+  answer("50", correct=TRUE),
+  answer("50%", correct=TRUE ),
+  allow_retry = TRUE,
+  trim = FALSE
 )
 ```
 
 
-What was the average hazard (or rate) of death in the treated group?
-
-
-```{r grade_res5, exercise = TRUE}
-
-```
-
-```{r grade_res5-check}
-grade_result(
-  pass_if(~ identical(.result, 40/200), "Correct, 40/200."),
-  fail_if(~ identical(.result, 40/180), "Incorrect - check the time at risk you used."),
-  fail_if(~ identical(.result, 50/180), "Incorrect - this is the control group"),
-  fail_if(~ TRUE, "Not quite. Consider that the mean hazard is the total number of deaths divided by total time at risk (or followed up).")
+```{r question-absrisk3}
+question_text(
+  "What was the relative risk of death for the new treatment in the trial (to at most 2 decimal places (dp))?",
+  answer("0.8", correct=TRUE),
+  answer("0.80", correct=TRUE ),
+  answer("1.25", message = "Close, but this is the relative risk of the placebo group relative to the treated group. You need to invert your answer / reasoning."),
+  allow_retry = TRUE,
+  trim = FALSE
 )
 ```
 
-What is was the hazard ratio for new treatment in the trial?
-
-```{r grade_res6, exercise = TRUE}
-
-```
-
-```{r grade_res6-check}
-grade_result(
-  pass_if(~ identical(.result, (40/200) / (50/180)), "Correct, (40/200) / (50/180)"),
-  fail_if(~ identical(.result, (50/180) / (40/200)), "Close, but this is the relative risk of the placebo group relative to the treated group. You need to invert your answer / reasoning. "),
-  fail_if(~ identical(.result, 4/5 ), "Almost, but this is the relative risk, not the hazard ratio. Make sure to use your answers above and take the ratio."),
-    fail_if(~ TRUE, "Not quite. Consider that the hazard ratio is the ratio of the two hazards you calculated above.")
+```{r question-absrisk4}
+question_text(
+  "What was the average hazard (or rate) of death in the placebo group (to at most 2dp)",
+  answer("0.28", correct=TRUE),
+  allow_retry = TRUE,
+  trim = FALSE
 )
 ```
+
+```{r question-absrisk5}
+question_text(
+  "What was the average hazard (or rate) of death in the treated group? (to at most 2dp)",
+  answer("0.2", correct=TRUE),
+  answer("0.20", correct=TRUE),
+  allow_retry = TRUE,
+  trim = FALSE
+)
+```
+
+
+```{r question-absrisk6}
+question_text(
+  "What is was the hazard ratio for new treatment in the trial? (to at most 2dp)",
+  answer("0.72", correct=TRUE),
+  answer("1.39", message="Close, but this is the relative risk of the placebo group relative to the treated group. You need to invert your answer / reasoning. "),
+  answer("0.8", message="Almost, but this is the relative risk, not the hazard ratio. Make sure to use your answers above and take the ratio."),
+  allow_retry = TRUE,
+  trim = FALSE
+)
+```
+
 
 Notice that the relative risk and the hazard ratio are not the same. **Do you understand why they differ?**
 
@@ -314,18 +295,21 @@ question_text(
 
 ```
 
- Using your answers above, work out the relative risk of death in G2 relative to G1 at 40y?
  
-```{r grade_res7, exercise = TRUE}
+```{r questionrelriskg2}
 
-```
-
-```{r grade_res7-check}
-grade_result(
-  pass_if(~ identical(round(.result,2), 1.27 ), "Correct, 0.89 / 0.70"),
-  fail_if(~ identical(round(.result,2), 0.79 ), "Almost, but you have given the relative risk of G1 relative to G2, rather than G2 relative to G1  need 0.89 / 0.70"),
-      fail_if(~ TRUE, "Not quite. Consider that the relative risk is the ration of the proportions of group 1 and group 2 who died by 40y (you calculated these above)")
+question_text(
+  " Using your answers above, work out the relative risk of death in G2 relative to G1 at 40y? (to 2dp)",
+  answer("1.27", correct=TRUE),
+  answer("0.79", message = "Almost, but you have given the relative risk of G1 relative to G2, rather than G2 relative to G1  need 0.89 / 0.70"),
+  answer("90%", message = "Almost! Answer is 89%"),
+  answer("88%", message = "Almost! Answer is 89%"),
+  answer("89", correct = TRUE),
+  answer("89%", correct = TRUE),
+  allow_retry = TRUE,
+  trim = FALSE
 )
+
 ```
 
 ## Estimating survival
@@ -423,19 +407,19 @@ ggsurvplot(survfit(Surv(time, status) ~ x, aml),
 
 
  Using the above modified plot, determine the approximate difference in median survival between the two groups.
- 
-```{r grade_res8, exercise = TRUE}
 
-```
+```{r question6pt2}
 
-```{r grade_res8-check}
-grade_result(
-  pass_if(~ identical(round(.result), 8 ), "Correct"),
-  pass_if(~ identical(round(.result), 9 ), "Correct"),
-      fail_if(~ TRUE, "Not quite. What is the difference between the median survival shown by the black dashed lines (x-axis)?")
+question_text(
+  "Using the above modified plot, determine the approximate difference in median survival between the two groups (to nearest percent).",
+  answer("8", correct=TRUE),
+  answer("9", correct=TRUE),
+  allow_retry = TRUE,
+  trim = FALSE
 )
-```
 
+```
+ 
 ## Testing for differences between two survival curves
 
 A log-rank test was used to calculate the p-vaue shown in the figure below.

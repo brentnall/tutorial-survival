@@ -1,9 +1,0 @@
-install.packages(
-  "gradethis",
-  "knitr",
-  "learnr",
-  "rmarkdown",
-  "shiny",
-  "survival",
-  "survminer"
-)
