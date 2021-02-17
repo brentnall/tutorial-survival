@@ -52,7 +52,7 @@ question_radio(
   "What is a hazard?",
   answer("rate at which some outcome of interest occurs over a given period of time (e.g. cancer diagnosis per year)", correct=TRUE),
   answer("probability that an outcome of interest occurs over a given period of time (e.g. chance of a cancer diagnosis over period)"),
-  answer("rate at which some outcome of interest does not occur over a given period of time (e.g. chance of not having a cancer diagnosis over period)"),
+  answer("probability some outcome of interest does not occur over a given period of time (e.g. chance of not having a cancer diagnosis over period)"),
   answer("rate at which some outcome of interest does not occur over a given period of time (e.g. not having cancer diagnosis per year)"),
   allow_retry = TRUE,
   random_answer_order = TRUE
@@ -97,7 +97,7 @@ Here is a calculator (R command window) that you might use to help you answer th
 question_text(
   "Calculate the absolute risk of death in the trial. Enter you answer as a percentage",
   answer("40", correct=TRUE),
-  answer("40%", correct=TRUE ),
+  answer("40%", correct=TRUE),
   answer("20", message = "This is the mean rate, use number of patients not time at risk"),
   answer("20%", message = "This is the mean rate, use number of patients not time at risk"),
   allow_retry = TRUE,
