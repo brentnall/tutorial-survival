@@ -7,3 +7,4 @@ dependencies:
   - r-learnr
   - r-survival
   - r-survminer
+  - r-Rcpp
