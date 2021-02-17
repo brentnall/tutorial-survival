@@ -8,3 +8,4 @@ dependencies:
   - r-survival
   - r-survminer
   - r-Rcpp
+  - libgcc
