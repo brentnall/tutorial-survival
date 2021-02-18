@@ -1,4 +1,10 @@
+r-api-3.4
+r-cran-tidyverse
+r-cran-survival
 r-cran-shinydashboard
 r-cran-htmltools
 r-cran-shiny
-
+r-cran-digest
+r-cran-rcpp
+r-cran-httpuv
+r-cran-*
