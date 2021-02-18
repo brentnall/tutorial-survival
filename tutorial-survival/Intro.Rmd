@@ -94,73 +94,75 @@ Here is a calculator (R command window) that you might use to help you answer th
 **Scenario** 100 patients are recruited into a trial and were randomised to receive a new drug to treat cancer. In total they are followed up for 200 person years, and 40 died. 
 
 ```{r question-absrisk1}
-question_text(
-  "Calculate the absolute risk of death in the trial. Enter you answer as a percentage",
-  answer("40", correct=TRUE),
+question_radio(
+  "Calculate the absolute risk of death in the trial.",
+  answer("20%"),
   answer("40%", correct=TRUE),
-  answer("20", message = "This is the mean rate, use number of patients not time at risk"),
-  answer("20%", message = "This is the mean rate, use number of patients not time at risk"),
+  answer("50%"),
+  answer("60%"),
   allow_retry = TRUE,
-  trim = FALSE
-)
+  random_answer_order=TRUE)
 ```
 
 
 Another 100 patients were also recruited into a trial, and they were randomised to receive a placebo and acted as a control group. In total this group were followed up for 180 person years, and 50 died. Calculate the absolute risk of death in the trial of this group and enter it as a proportion (number between 0 and 1), or by calculating it using R code.
 
 ```{r question-absrisk2}
-question_text(
-  "Calculate the absolute risk of death in the trial of this group as a percentage (between 0 and 100%)",
-  answer("50", correct=TRUE),
+question_radio(
+  "Calculate the absolute risk of death in the trial of this group",
+  answer("20%"),
+  answer("40%"),
   answer("50%", correct=TRUE ),
+  answer("60%"),
   allow_retry = TRUE,
-  trim = FALSE
-)
+  random_answer_order=TRUE)
 ```
 
 
 ```{r question-absrisk3}
-question_text(
-  "What was the relative risk of death for the new treatment in the trial (to at most 2 decimal places (dp))?",
-  answer("0.8", correct=TRUE),
+question_radio(
+  "What was the relative risk of death for the new treatment in the trial (to 2 decimal places (dp))?",
+  answer("0.50"),
   answer("0.80", correct=TRUE ),
   answer("1.25", message = "Close, but this is the relative risk of the placebo group relative to the treated group. You need to invert your answer / reasoning."),
+  answer("2.00"),
   allow_retry = TRUE,
-  trim = FALSE
-)
+  random_answer_order=TRUE)
 ```
 
 ```{r question-absrisk4}
-question_text(
+question_radio(
   "What was the average hazard (or rate) of death in the placebo group (to at most 2dp)",
+  answer("0.20"),
   answer("0.28", correct=TRUE),
-  allow_retry = TRUE,
-  trim = FALSE
-)
+  answer("0.50"),	
+  answer("1.00"),
+  random_answer_order=TRUE,
+  allow_retry = TRUE)
 ```
 
 ```{r question-absrisk5}
-question_text(
+question_radio(
   "What was the average hazard (or rate) of death in the treated group? (to at most 2dp)",
-  answer("0.2", correct=TRUE),
   answer("0.20", correct=TRUE),
+answer("0.28"),
+  answer("0.50"),	
+  answer("1.00"),
   allow_retry = TRUE,
-  trim = FALSE
-)
+random_answer_order=TRUE)
 ```
 
 
 ```{r question-absrisk6}
-question_text(
+question_radio(
   "What is was the hazard ratio for new treatment in the trial? (to at most 2dp)",
   answer("0.72", correct=TRUE),
   answer("1.39", message="Close, but this is the relative risk of the placebo group relative to the treated group. You need to invert your answer / reasoning. "),
-  answer("0.8", message="Almost, but this is the relative risk, not the hazard ratio. Make sure to use your answers above and take the ratio."),
+  answer("0.80", message="Almost, but this is the relative risk, not the hazard ratio. Make sure to use your answers above and take the ratio."),
+  answer("1.00"),
   allow_retry = TRUE,
-  trim = FALSE
-)
+random_answer_order=TRUE)
 ```
-
 
 Notice that the relative risk and the hazard ratio are not the same. **Do you understand why they differ?**
 
@@ -208,20 +210,18 @@ legend("topright", c("Group 1", "Group 2"),col=c(1,2), lty=c(1,2), lwd=3, bg="wh
 
 
 ```{r question}
-question_text(
+question_radio(
   "What is approximate median survival in group 1?",
   answer("24", message = "Almost! A bit less"),
   answer("22", message = "Almost! A bit more"),
   answer("12", message = "Are you looking at group 2?"),
   answer("23", correct = TRUE),
-  answer("23y", correct = TRUE),
   allow_retry = TRUE,
-  trim = FALSE
-)
+  random_answer_order = TRUE)
 ```
 
 ```{r question2}
-question_text(
+question_radio(
   "What is approximate median survival in group 2?",
   answer("13", message = "Almost! A bit less"),
   answer("11", message = "Almost! A bit more"),
@@ -229,52 +229,42 @@ question_text(
   answer("12", correct = TRUE),
   answer("12y", correct = TRUE),
   allow_retry = TRUE,
-  trim = FALSE
-)
+  random_answer_order = TRUE)
 ```
 ```{r question3}
 
-question_text(
-  "What is approximate interquartile range in group 1 (write as x-y)?",
-  answer("9-46", message = "Almost! Lower bound a little too low. Answer is 10-46"),
-  answer("10-47", message = "Almost! Upper bound a little too high. Answer is 10-46"),
-  answer("11-46", message = "Almost! Lower bound a little too high. Answer is 10-46"),
-  answer("10-45", message = "Almost! Upper bound a little too low. Answer is 10-46"),
+question_radio(
+  "What is approximate interquartile range in group 1 (write as x-y)?",  
+  answer("0.25-0.75"),
+  answer("0-80"),
+  answer("5-25"),
   answer("10-46", correct = TRUE),
-  answer("10-46y", correct = TRUE),
-  allow_retry = TRUE,
-  trim = FALSE
-)
+  allow_retry = TRUE)
 
 ```
 ```{r question4}
 
-question_text(
-  "What is approximate interquartile range in group 2 (write as x-y)?",
-  answer("4-25", message = "Almost! Lower bound a little too low. Answer is 5-25"),
-  answer("5-26", message = "Almost! Upper bound a little too high. Answer is 5-25"),
-  answer("6-25", message = "Almost! Lower bound a little too high. Answer is 5-25"),
-  answer("5-24", message = "Almost! Upper bound a little too low. Answer is 5-25"),
+question_radio(
+  "What is approximate interquartile range in group 2 (in years)?",
+  answer("10-46", message = "Almost! Upper bound a little too high. Answer is 5-25"),
+  answer("0.25-0.75"),
+  answer("0-80"),
   answer("5-25", correct = TRUE),
-  answer("5-25y", correct = TRUE),
-  allow_retry = TRUE,
-  trim = FALSE
-)
+    allow_retry = TRUE,
+  random_answer_order = TRUE)
 
 ```
 
 ```{r question5}
 
-question_text(
-  "What percentage (between 0 and 100) of group 1 are dead by 40y?",
-  answer("69", message = "Almost! Answer is 70%"),
-  answer("71", message = "Almost! Answer is 70%"),
+question_radio(
+  "What percentage of group 1 are dead by 40y?",
   answer("69%", message = "Almost! Answer is 70%"),
-  answer("71%", message = "Almost! Answer is 70%"),
-  answer("70", correct = TRUE),
   answer("70%", correct = TRUE),
+  answer("30%"),
+  answer("100%"),
   allow_retry = TRUE,
-  trim = FALSE
+  random_answer_order = TRUE
 )
 
 ```
@@ -282,15 +272,13 @@ question_text(
 ```{r question6}
 
 question_text(
-  "What percentage (between 0 and 100) of group 2 are dead by 40y?",
-  answer("90", message = "Almost! Answer is 89%"),
-  answer("88", message = "Almost! Answer is 89%"),
-  answer("90%", message = "Almost! Answer is 89%"),
-  answer("88%", message = "Almost! Answer is 89%"),
-  answer("89", correct = TRUE),
+  "What percentage of group 2 are dead by 40y?",
+  answer("100%"),
+  answer("11%"),
+  answer("70%"),
   answer("89%", correct = TRUE),
   allow_retry = TRUE,
-  trim = FALSE
+  random_answer_order = TRUE
 )
 
 ```
@@ -298,16 +286,14 @@ question_text(
  
 ```{r questionrelriskg2}
 
-question_text(
+question_radio(
   " Using your answers above, work out the relative risk of death in G2 relative to G1 at 40y? (to 2dp)",
   answer("1.27", correct=TRUE),
   answer("0.79", message = "Almost, but you have given the relative risk of G1 relative to G2, rather than G2 relative to G1  need 0.89 / 0.70"),
-  answer("90%", message = "Almost! Answer is 89%"),
-  answer("88%", message = "Almost! Answer is 89%"),
-  answer("89", correct = TRUE),
-  answer("89%", correct = TRUE),
+  answer("90%"),
+  answer("1.00"),
   allow_retry = TRUE,
-  trim = FALSE
+  random_answer_order = TRUE
 )
 
 ```
@@ -410,12 +396,15 @@ ggsurvplot(survfit(Surv(time, status) ~ x, aml),
 
 ```{r question6pt2}
 
-question_text(
+question_radio(
   "Using the above modified plot, determine the approximate difference in median survival between the two groups (to nearest percent).",
-  answer("8", correct=TRUE),
-  answer("9", correct=TRUE),
+  answer("8y", correct=TRUE),
+  answer("9y", correct=TRUE),
+  answer("50%"),
+  answer("8%"),
+  answer("9%"),
   allow_retry = TRUE,
-  trim = FALSE
+  random_answer_order = TRUE
 )
 
 ```
@@ -493,13 +482,14 @@ thistxt <- fn.formatci(exp(coef(t.coxph)), exp(t.confint[1]), exp(t.confint[2]))
 
 ```{r question-hazard2a}
 
-question_text(
+question_radio(
   "What value of the hazard ratio (a number) corresponds to having the same mean hazard in each of the two groups?",
   answer("0", message = "Not correct. This would mean that one group had no risk of the event."),
   answer("1", correct = TRUE),
-  answer("1.0", correct = TRUE),
+  answer("0.5"),
+  answer("100%"),
   allow_retry = TRUE,
-  trim = FALSE
+  random_answer_order = TRUE
 )
 
 ```
@@ -509,14 +499,14 @@ question_text(
 
 ```{r question-hazard2b}
 
-question_text(
+question_radio(
   "What is the most likely value of the hazard ratio based on the results?",
   answer("0.92", message = "Not correct. This is the lower 95%CI limit."),
   answer("6.81", message = "Not correct. This is the upper 95%CI limit."),
   answer("2.50", correct = TRUE),
-  answer("2.5", correct = TRUE),
+  answer("1.0"),
   allow_retry = TRUE,
-  trim = FALSE
+  random_answer_order = TRUE
 )
 
 ```
@@ -524,15 +514,14 @@ question_text(
 
 ```{r question-hazard2c}
 
-question_text(
+question_radio(
   "Informally, based on the results one might say that the hazard ratio might be as large as what?",
   answer("0.92", message = "Not correct. This is the lower 95%CI limit."),
   answer("6.81", correct=TRUE ),
-  answer("6.8", correct=TRUE ),
   answer("2.50", message="This is the most likely value (point estimate), consider using the 95%CI as a measure of uncertainty in the results"),
-  answer("2.5", message="This is the most likely value (point estimate), consider using the 95%CI as a measure of uncertainty in the results"),
+  answer("100%"),
   allow_retry = TRUE,
-  trim = FALSE
+   random_answer_order= TRUE
 )
 
 ```
