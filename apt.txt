@@ -1,1 +1,4 @@
 r-cran-shinydashboard
+r-cran-htmltools
+r-cran-shiny
+
