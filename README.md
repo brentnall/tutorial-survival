@@ -1,6 +1,6 @@
 # Survival analysis tutorial 
 
-- Tutorial 1, Hello R: [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/brentnall/tutorial-survival/main?urlpath=shiny/tutorial-survival/Intro.Rmd)
+- Interactive tutorial: run in [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/brentnall/tutorial-survival/main?urlpath=shiny/tutorial-survival/Intro.Rmd)
 
 # License
 

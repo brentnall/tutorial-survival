@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Introduction
 
 ### Intended learning objectives
+
 The aim of this tutorial is to review material from the lecture, in order that you may
 
 1. Understand definitions of risk and survival
@@ -25,9 +26,9 @@ The aim of this tutorial is to review material from the lecture, in order that y
 
 1. Apply this knowledge to interpret survival analysis data when reading reports
 
-### What you will be do 
+### What is this? 
 
-The tutorial is a mix of reading material, instructions and questions. It is intended to be used like an exercise sheet, but will also provide instant feedback on your answers. To begin, please proceed to "Next Topic"
+The interactive tutorial is a mix of reading material, instructions and questions. It is similar to an exercise sheet, but will also provide instant feedback on your answers. To begin, please proceed to "Next Topic"
 
 ## Risk definitions
 
@@ -45,7 +46,7 @@ A relative risk greater than 1 means the outcome was more common in the experime
 
 ### Hazards
 
-Please review your lecture notes if you do not remember the definition of hazards below.
+Please review the lecture if you do not remember the definition of hazards below.
 
 ```{r question-hazard}
 question_radio(
@@ -96,7 +97,7 @@ Here is a calculator (R command window) that you might use to help you answer th
 ```{r question-absrisk1}
 question_radio(
   "Calculate the absolute risk of death in the trial.",
-  answer("20%"),
+  answer("20%", message="Close, but this is the rate (or hazard) of death. Review the definition of absolute risk to see the difference" ),
   answer("40%", correct=TRUE),
   answer("50%"),
   answer("60%"),
@@ -105,12 +106,12 @@ question_radio(
 ```
 
 
-Another 100 patients were also recruited into a trial, and they were randomised to receive a placebo and acted as a control group. In total this group were followed up for 180 person years, and 50 died. Calculate the absolute risk of death in the trial of this group and enter it as a proportion (number between 0 and 1), or by calculating it using R code.
+Another 100 patients were also recruited into a trial, and they were randomised to receive a placebo and acted as a control group. In total this group were followed up for 180 person years, and 50 died. 
 
 ```{r question-absrisk2}
 question_radio(
   "Calculate the absolute risk of death in the trial of this group",
-  answer("20%"),
+  answer("28%", message="Close, but this is the rate (or hazard) of death. Review the definition of absolute risk to see the difference" ),
   answer("40%"),
   answer("50%", correct=TRUE ),
   answer("60%"),
@@ -271,7 +272,7 @@ question_radio(
 
 ```{r question6}
 
-question_text(
+question_radio(
   "What percentage of group 2 are dead by 40y?",
   answer("100%"),
   answer("11%"),
